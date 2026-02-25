@@ -86,9 +86,3 @@ molly-memo/
 *   **视觉 (Visual)**：黑白灰主色调，大圆角 (`rounded-2xl/full`)，微阴影与毛玻璃质感。
 *   **排版 (Typography)**：优先使用 **PingFang SC** (苹方)，保持清晰易读。
 *   **适配 (Responsive)**：**移动端优先 (Mobile First)**，Web 端采用容器居中布局模拟 App 体验。
-
-## 7. 后续规划 (Roadmap)
-- [ ] 完善 Fabric.js 画布交互 (拖拽、缩放、旋转)。
-- [ ] 接入多模态大模型 API 实现“看图说话”。
-- [ ] 增加热门表情包模板库。
-- [ ] 移动端触控体验优化。

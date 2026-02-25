@@ -4,12 +4,13 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useEditorStore } from "@/lib/store";
 import * as fabric from "fabric";
-import { cn } from "@/lib/utils";
+import { cn, isMobileDevice } from "@/lib/utils";
 
-import { TextSettingsPanel } from "./components/TextSettingsPanel";
+import { CanvasMainArea } from "./components/CanvasMainArea";
 import { EditorHeader } from "./components/EditorHeader";
 import { EditorToolbar } from "./components/EditorToolbar";
-import { CanvasMainArea } from "./components/CanvasMainArea";
+import { TextSettingsPanel } from "./components/TextSettingsPanel";
+import { MobileSaveModal } from "./components/MobileSaveModal";
 
 const PRESET_COLORS = [
   "#ffffff", // White
@@ -35,6 +36,7 @@ export default function EditorPage() {
   const [activeObject, setActiveObject] = useState<fabric.Object | null>(null);
   const [editText, setEditText] = useState("");
   const [showTextEditor, setShowTextEditor] = useState(false);
+  const [saveModalImage, setSaveModalImage] = useState<string | null>(null);
 
   // Undo History State
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -397,19 +399,29 @@ export default function EditorPage() {
     }
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!fabricCanvas) return;
+    
+    // 1. 准备高清晰度图片数据
     fabricCanvas.discardActiveObject();
     fabricCanvas.renderAll();
 
     const dataURL = fabricCanvas.toDataURL({
       format: "png",
       quality: 1,
-      multiplier: 2,
+      multiplier: 3, // 提高清晰度以适应手机屏幕
     });
+    
+    // 2. 移动端：展示长按保存弹窗
+    if (isMobileDevice()) {
+      setSaveModalImage(dataURL);
+      return;
+    }
 
+    // 3. PC端：直接下载
+    const fileName = `molly-emoji-${Date.now()}.png`;
     const link = document.createElement("a");
-    link.download = `molly-emoji-${Date.now()}.png`;
+    link.download = fileName;
     link.href = dataURL;
     document.body.appendChild(link);
     link.click();
@@ -422,6 +434,13 @@ export default function EditorPage() {
     <div className="h-full bg-background flex flex-col items-center p-4 sm:p-8 overflow-hidden">
       <main className="h-full w-full max-w-[480px] flex flex-col gap-6 animate-in fade-in duration-500 h-[calc(100vh-4rem)] relative">
         <EditorHeader onDownload={handleDownload} />
+
+        {saveModalImage && (
+          <MobileSaveModal
+            imageUrl={saveModalImage}
+            onClose={() => setSaveModalImage(null)}
+          />
+        )}
 
         <div
           className={cn(
