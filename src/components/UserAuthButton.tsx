@@ -9,12 +9,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { AuthModal } from "@/components/AuthModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { MessageCircle, LogOut, History, User } from "lucide-react";
+import { LogIn, LogOut, History, User } from "lucide-react";
 import { useUserStore } from "@/lib/user-store";
 
 export function UserAuthButton() {
-  const { isLoggedIn, login, logout } = useUserStore();
+  const { isLoggedIn, logout } = useUserStore();
 
   return (
     <div className="fixed top-4 right-4 z-50">
@@ -31,7 +33,7 @@ export function UserAuthButton() {
           <DropdownMenuContent className="w-56" align="end" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium leading-none">微信用户</p>
+                <p className="text-sm font-medium leading-none">用户</p>
                 <p className="text-xs leading-none text-muted-foreground">
                   user@example.com
                 </p>
@@ -57,14 +59,18 @@ export function UserAuthButton() {
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <Button
-          onClick={login}
-          className="rounded-full shadow-lg bg-white/80 backdrop-blur-md text-foreground hover:bg-white border border-black/5 dark:bg-black/80 dark:text-white dark:hover:bg-black dark:border-white/10 transition-all gap-2"
-          variant="outline"
-        >
-          <MessageCircle className="w-4 h-4 text-[#07C160]" />
-          <span className="font-medium">登录</span>
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button
+              className="rounded-full shadow-lg bg-white/80 backdrop-blur-md text-foreground hover:bg-white border border-black/5 dark:bg-black/80 dark:text-white dark:hover:bg-black dark:border-white/10 transition-all gap-2"
+              variant="outline"
+            >
+              <LogIn className="w-4 h-4" />
+              <span className="font-medium">登录 / 注册</span>
+            </Button>
+          </DialogTrigger>
+          <AuthModal />
+        </Dialog>
       )}
     </div>
   );

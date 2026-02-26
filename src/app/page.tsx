@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ImagePlus, Sparkles, Search, Wand2 } from "lucide-react";
 import Link from "next/link";
-// import { UserAuthButton } from "@/components/UserAuthButton";
+import { UserAuthButton } from "@/components/UserAuthButton";
 import { useUserStore } from "@/lib/user-store";
 
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
       <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-purple-400/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen animate-pulse" style={{ animationDelay: "2s" }} />
 
       {/* 右上角悬浮登录/用户信息按钮 */}
-      {/* <UserAuthButton /> */}
+      <UserAuthButton />
 
       {/* 模拟移动端容器 */}
       <main className="w-full max-w-[480px] flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 z-10">
