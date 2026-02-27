@@ -4,6 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "react-jsx",
     "baseUrl": ".",
+    "types": ["node"],
     "paths": {
       "@/*": ["./*"]
     },
