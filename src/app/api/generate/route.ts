@@ -9,7 +9,8 @@ const client = new OpenAI({
 
 export async function POST(req: NextRequest) {
   try {
-    const { image } = await req.json();
+    const body = await req.json();
+    const { image } = body as { image?: string };
 
     if (!image) {
       return NextResponse.json(

@@ -1,24 +1,26 @@
 name = "molly-memo-worker"
 main = "src/index.ts"
 compatibility_date = "2024-01-01"
-
 compatibility_flags = ["nodejs_compat"]
 
+# 默认环境 (dev)
 [dev]
 port = 8787
+
+[vars]
+APP_ENV = "development"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "molly-memo-db-dev"
 database_id = "0fcdf688-248f-455d-8ee1-7b790e7a22d2"
+migrations_dir = "drizzle/migrations"
 
 [[r2_buckets]]
 binding = "R2"
 bucket_name = "molly-memo-bucket-dev"
 
-[vars]
-APP_ENV = "development"
-
+# 生产环境 (production)
 [env.production]
 name = "molly-memo-worker-prod"
 
@@ -29,6 +31,7 @@ APP_ENV = "production"
 binding = "DB"
 database_name = "molly-memo-db-prod"
 database_id = "97c85fb2-d0b5-4406-ade9-c4a76f5095f2"
+migrations_dir = "drizzle/migrations"
 
 [[env.production.r2_buckets]]
 binding = "R2"
