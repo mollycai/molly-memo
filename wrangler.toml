@@ -1,6 +1,6 @@
-name = "molly-memo-worker"
-main = "src/index.ts"
-compatibility_date = "2024-01-01"
+name = "molly-memo"
+pages_build_output_dir = ".vercel/output/static"
+compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
 # 默认环境 (dev)
