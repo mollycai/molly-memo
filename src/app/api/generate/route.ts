@@ -1,14 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 
+export const runtime = "edge";
+
 // 初始化 OpenAI 客户端，配置为阿里云 DashScope 的兼容模式
-const client = new OpenAI({
-  apiKey: process.env.DASHSCOPE_API_KEY,
-  baseURL: "https://dashscope.aliyuncs.com/compatible-mode/v1",
-});
+// 注意：在 Edge Runtime 中，不要在模块顶层初始化 client，
+// 而是应该在 handler 内部或使用 lazy initialization，以确保能获取到运行时的 env
+const getClient = () => {
+  return new OpenAI({
+    apiKey: process.env.DASHSCOPE_API_KEY,
+    baseURL: "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  });
+};
 
 export async function POST(req: NextRequest) {
   try {
+    const client = getClient();
     const body = await req.json();
     const { image } = body as { image?: string };
 
