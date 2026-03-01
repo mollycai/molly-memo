@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { X, Wand2, ChevronLeft, UploadCloud } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
 
 export default function CreatePage() {
   const router = useRouter();
@@ -44,7 +45,7 @@ export default function CreatePage() {
     if (!uploadedImage) return;
     
     setIsGenerating(true);
-    setGeneratedCaption(''); // Clear previous caption
+    setGeneratedCaption('');
 
     try {
       const response = await fetch('/api/generate', {
@@ -55,18 +56,17 @@ export default function CreatePage() {
         body: JSON.stringify({ image: uploadedImage }),
       });
 
-      const data = await response.json();
+      const data: { caption: string } = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to generate caption');
+        throw new Error('AI 生成失败，请稍后重试');
       }
 
       setGeneratedCaption(data.caption);
       router.push('/editor');
     } catch (error) {
       console.error('Generation failed:', error);
-      // Optional: Show toast error here
-      alert('AI 生成失败，请稍后重试');
+      toast.error('AI 生成失败，请稍后重试');
     } finally {
       setIsGenerating(false);
     }

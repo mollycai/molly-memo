@@ -26,7 +26,8 @@ export function UserAuthButton() {
     try {
       await authApi.logout();
     } catch (error) {
-      console.error("Logout error", error);
+      console.error("退出登录失败:", error);
+      toast.error("退出登录失败，请稍后重试");
     } finally {
       logout();
       toast.success("已退出登录");

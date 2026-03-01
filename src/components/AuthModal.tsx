@@ -63,8 +63,9 @@ export function AuthModal({ onOpenChange }: { onOpenChange?: (open: boolean) => 
           return prev - 1;
         });
       }, 1000);
-    } catch (error: any) {
-      toast.error(error.response?.data?.error || "发送验证码失败");
+    } catch (error) {
+      console.error("发送验证码失败:", error);
+      toast.error("发送验证码失败");
     } finally {
       setIsLoading(false);
     }
@@ -85,8 +86,9 @@ export function AuthModal({ onOpenChange }: { onOpenChange?: (open: boolean) => 
       setAuth(data.token, data.user);
       toast.success("登录成功");
       onOpenChange?.(false);
-    } catch (error: any) {
-      toast.error(error.message || "登录失败");
+    } catch (error) {
+      console.error("登录失败:", error);
+      toast.error("登录失败");
     } finally {
       setIsLoading(false);
     }
@@ -116,8 +118,9 @@ export function AuthModal({ onOpenChange }: { onOpenChange?: (open: boolean) => 
       setAuth(data.token, data.user);
       toast.success("注册成功");
       onOpenChange?.(false);
-    } catch (error: any) {
-      toast.error(error.message || "注册失败");
+    } catch (error) {
+      console.error("注册失败:", error);
+      toast.error("注册失败");
     } finally {
       setIsLoading(false);
     }

@@ -58,9 +58,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ caption });
   } catch (error) {
-    console.error("AI Generation Error:", error);
+    console.error("AI 生成失败:", error);
     return NextResponse.json(
-      { error: "Failed to generate caption" },
+      { error: "AI 生成失败，请稍后重试" },
       { status: 500 }
     );
   }

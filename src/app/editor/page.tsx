@@ -105,7 +105,7 @@ export default function EditorPage() {
       setShowTextEditor(false);
       isWorkUnsaved.current = false;
     } catch (error) {
-      console.error("Undo failed:", error);
+      console.error("撤销失败:", error);
     } finally {
       isHistoryLocked.current = false;
     }
