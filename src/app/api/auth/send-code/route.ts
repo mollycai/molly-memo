@@ -47,7 +47,7 @@ export async function POST(req: Request) {
     const resend = new Resend(env.RESEND_API_KEY);
     
     const { error } = await resend.emails.send({
-      from: "Molly Memo <onboarding@resend.dev>", // TODO: Replace with your domain
+      from: "Molly Meme <onboarding@resend.dev>", // TODO: Replace with your domain
       to: email,
       subject: "您的验证码",
       html: `<p>您的验证码是：<strong>${code}</strong></p><p>该验证码将在 10 分钟后过期。</p>`,

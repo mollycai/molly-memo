@@ -33,7 +33,7 @@ export default function Home() {
           </div>
           <div className="space-y-3">
             <h1 className="text-4xl font-bold tracking-tight text-foreground bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70">
-              Molly Memo
+              Molly Meme
             </h1>
             <p className="text-muted-foreground text-lg leading-relaxed px-4 font-light">
               AI 驱动的表情包生成器

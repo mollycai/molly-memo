@@ -76,6 +76,33 @@ export default function CreatePage() {
     if (!uploadedImage) return;
     setGeneratedCaption('');
     router.push('/editor');
+	};
+	
+  // 使用 public 下的示例图片，转为 Data URL 复用现有上传/生成流程
+  const handleExamplePic = async () => {
+    try {
+      const response = await fetch('/example-meme.png');
+      if (!response.ok) {
+        throw new Error('加载示例图片失败');
+      }
+
+      const blob = await response.blob();
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target?.result) {
+          setUploadedImage(e.target.result as string);
+        } else {
+          toast.error('加载示例图片失败');
+        }
+      };
+      reader.onerror = () => {
+        toast.error('加载示例图片失败');
+      };
+      reader.readAsDataURL(blob);
+    } catch (error) {
+      console.error('Load example image failed:', error);
+      toast.error('加载示例图片失败');
+    }
   };
 
   return (
@@ -188,7 +215,7 @@ export default function CreatePage() {
             
             {!uploadedImage && (
               <p className="text-xs text-center text-muted-foreground mt-4">
-                或者先 <span className="underline cursor-pointer hover:text-foreground">试试示例图片</span>
+                或者先 <span className="underline cursor-pointer hover:text-foreground" onClick={handleExamplePic}>试试示例图片</span>
               </p>
             )}
           </div>

@@ -1,6 +1,6 @@
-# Molly Memo Generator & Editor
+# Molly Meme Generator & Editor
 
-**Molly Memo** 是一个基于 AI 的表情包生成与编辑器。旨在通过智能识别图片情绪并推荐“神配文”，让表情包制作变得极其简单和有趣。
+**Molly Meme** 是一个基于 AI 的表情包生成与编辑器。旨在通过智能识别图片情绪并推荐“神配文”，让表情包制作变得极其简单和有趣。
 
 ## 1. 简介 (Introduction)
 
@@ -24,7 +24,7 @@
 ## 3. 目录结构 (Project Structure)
 
 ```text
-molly-memo/
+molly-meme/
 ├── src/
 │   ├── app/                 # Next.js App Router 页面路由
 │   │   ├── api/             # 后端 API 接口 (Next.js Route Handlers)

@@ -131,7 +131,7 @@ export function AuthModal({ onOpenChange }: { onOpenChange?: (open: boolean) => 
       <div className="p-6 pt-8 bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 border-b">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center tracking-tight">
-            {activeTab === "login" ? "欢迎回来" : "加入 Molly Memo"}
+            {activeTab === "login" ? "欢迎回来" : "加入 Molly Meme"}
           </DialogTitle>
           <DialogDescription className="text-center text-muted-foreground/80">
             {activeTab === "login"

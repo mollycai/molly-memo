@@ -3,7 +3,7 @@ import { Toaster } from "sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Molly memo",
+  title: "Molly meme",
   description: "AI-powered meme generator & editor",
 };
 
